@@ -9,10 +9,9 @@ const AnecdoteList = () => {
     const dispatch = useDispatch()
 
     const vote = (id) => {
-        console.log('vote', id)
         dispatch(voteAnectode(id))
         const anecdoteToVote = anecdotes.find(n => n.id === id)
-        dispatch(notificationReducer({ content: anecdoteToVote.content, type: 'vote' }))
+        dispatch(notificationReducer({ content: `you voted '${anecdoteToVote.content}'`, timeout: 10 }))
       }
 
       const anecdotesSortedByVotes = anecdotes.slice().sort((a, b) => b.votes - a.votes)

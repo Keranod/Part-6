@@ -4,27 +4,26 @@ const notificationSlice = createSlice({
     name: 'notification',
     initialState: {
         content: '',
-        type: null
+        timeout: null
     },
     reducers: {
         notificationReducer(state, action) {
-            const { content , type } = action.payload
+            const { content, timeout } = action.payload
             const newState = {
                 content: content,
-                type: type
+                timeout: timeout * 1000
             }
             return newState
         },
-        toggleNotificationVisibility(state, action) {
-            const type = action.payload
+        zeroTimeout(state, action) {
             const newState = {
                 ...state,
-                type: type
+                timeout: 0
             }
             return newState
         }
     }
 })
 
-export const { notificationReducer, toggleNotificationVisibility } = notificationSlice.actions
+export const { notificationReducer, zeroTimeout } = notificationSlice.actions
 export default notificationSlice.reducer
