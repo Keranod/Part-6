@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { voteAnectode } from '../reducers/anecdoteReducer'
+import { notificationReducer } from '../reducers/notificationReducer'
 import Filter from './Filter'
 
 const AnecdoteList = () => {
@@ -10,6 +11,8 @@ const AnecdoteList = () => {
     const vote = (id) => {
         console.log('vote', id)
         dispatch(voteAnectode(id))
+        const anecdoteToVote = anecdotes.find(n => n.id === id)
+        dispatch(notificationReducer({ content: anecdoteToVote.content, type: 'vote' }))
       }
 
       const anecdotesSortedByVotes = anecdotes.slice().sort((a, b) => b.votes - a.votes)
