@@ -8,10 +8,12 @@ const Notification = () => {
   const dispatch = useDispatch()
   
   useEffect(() => {
-    if (type !== null) {
-      setTimeout(() => {
-        dispatch(toggleNotificationVisibility(null))
-      }, 5000)}
+    const timeoutId = setTimeout(() => {
+      dispatch(toggleNotificationVisibility(null));
+    }, 5000);
+  
+    // Set a new timeout whenever notification.content changes
+    return () => clearTimeout(timeoutId)
   }, [notification.content])
 
   const style = {
