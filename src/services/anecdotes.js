@@ -12,5 +12,12 @@ const getAll = async () => {
     const response = await axios.post(baseUrl, object)
     return response.data
   }
+
+  const vote = async (id) => {
+    const anectodeUrl = `${baseUrl}/${id}`
+    const votedAnectode = await axios.get(anectodeUrl)
+    const response = await axios.patch(anectodeUrl, { votes: votedAnectode.data.votes + 1 })
+    return response.data
+  }
   
-  export default { getAll, createNew }
+  export default { getAll, createNew, vote }

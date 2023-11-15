@@ -12,7 +12,6 @@ const Notification = () => {
       dispatch(toggleNotificationVisibility(null));
     }, 5000);
   
-    // Set a new timeout whenever notification.content changes
     return () => clearTimeout(timeoutId)
   }, [notification.content])
 
