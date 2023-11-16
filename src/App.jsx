@@ -11,13 +11,13 @@ const App = () => {
     console.log('vote')
   }
 
-  const anecdotes = [
-    {
-      "content": "If it hurts, do it more often",
-      "id": "47145",
-      "votes": 0
-    },
-  ]
+  // const anecdotes = [
+  //   {
+  //     "content": "If it hurts, do it more often",
+  //     "id": "47145",
+  //     "votes": 0
+  //   },
+  // ]
 
   const result = useQuery(
     {
@@ -30,6 +30,12 @@ const App = () => {
     if ( result.isError ) {
       return <div>anecdote service not available due to problems in server</div>
     }
+
+    if ( result.isLoading ) {
+      return <div>loading data...</div>
+    }
+
+    const anecdotes = result.data
 
   return (
     <div>
