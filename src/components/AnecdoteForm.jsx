@@ -10,6 +10,9 @@ const AnecdoteForm = () => {
 
   const newAnecdoteMutation = useMutation({
     mutationFn: createAnecdote,
+    onError: () => {
+      dispatch({ type: 'DISPLAY', payload: {message: 'too short anecdote, must have length 5 or more', timeout: 5}})
+    },
     onSuccess: async (newAnecdote) => {
       // need to fetch anecdotes because id is assigned by the server and without id react misbehaves
       const updatedAnecdotes = await getAnecdotes()
